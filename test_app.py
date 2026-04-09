@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
-from summarizer_api.main import app
-from summarizer_api.services import summarizer as summarizer_service
+from app.main import app
+from app.services import summarizer as summarizer_service
 
 client = TestClient(app)
 
