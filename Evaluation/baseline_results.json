@@ -1,0 +1,27 @@
+[
+  {
+    "input": "normal text",
+    "issue": "summary is too generic",
+    "correct": false
+  },
+  {
+    "input": "short text",
+    "issue": "not enough detail in output",
+    "correct": false
+  },
+  {
+    "input": "empty input",
+    "issue": "no proper error handling",
+    "correct": false
+  },
+  {
+    "input": "long text",
+    "issue": "important points not clearly extracted",
+    "correct": false
+  },
+  {
+    "input": "random text",
+    "issue": "still generates meaningless output",
+    "correct": false
+  }
+]

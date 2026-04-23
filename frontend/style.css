@@ -1,0 +1,218 @@
+:root {
+    --bg-top: #fef6ec;
+    --bg-bottom: #f4f7fb;
+    --card: rgba(255, 255, 255, 0.72);
+    --card-strong: #ffffff;
+    --border: rgba(38, 52, 77, 0.12);
+    --text-main: #162033;
+    --text-soft: #5e6a81;
+    --accent: #e76f51;
+    --accent-dark: #cb583a;
+    --shadow: 0 24px 60px rgba(45, 62, 90, 0.14);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at top left, rgba(231, 111, 81, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(42, 157, 143, 0.18), transparent 28%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+}
+
+.page-shell {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 48px 0;
+}
+
+.hero-card {
+    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+}
+
+.hero-copy {
+    max-width: 720px;
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(231, 111, 81, 0.12);
+    color: var(--accent-dark);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hero-copy h1 {
+    margin: 0 0 14px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.2rem, 4vw, 4.2rem);
+    line-height: 1.05;
+}
+
+.hero-copy p {
+    margin: 0;
+    max-width: 60ch;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 22px;
+}
+
+.panel {
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: var(--card-strong);
+    box-shadow: 0 10px 30px rgba(31, 42, 68, 0.08);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.panel-header h2 {
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+}
+
+.panel-header p {
+    margin: 0;
+    color: var(--text-soft);
+    line-height: 1.5;
+}
+
+.meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.meta span {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #f7f2ee;
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+textarea {
+    width: 100%;
+    min-height: 320px;
+    resize: vertical;
+    padding: 18px 20px;
+    border: 1px solid rgba(38, 52, 77, 0.14);
+    border-radius: 20px;
+    outline: none;
+    font: inherit;
+    line-height: 1.7;
+    color: var(--text-main);
+    background: linear-gradient(180deg, #fffdfb, #fff8f3);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+textarea:focus {
+    border-color: rgba(231, 111, 81, 0.6);
+    box-shadow: 0 0 0 5px rgba(231, 111, 81, 0.12);
+    transform: translateY(-1px);
+}
+
+button {
+    margin-top: 18px;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 22px;
+    font: inherit;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--accent), #f4a261);
+    cursor: pointer;
+    box-shadow: 0 16px 28px rgba(231, 111, 81, 0.24);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px rgba(231, 111, 81, 0.3);
+    filter: saturate(1.08);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.output-box {
+    min-height: 394px;
+    padding: 22px;
+    border-radius: 20px;
+    background:
+        linear-gradient(180deg, rgba(244, 162, 97, 0.12), rgba(42, 157, 143, 0.08)),
+        #fffdfc;
+    border: 1px solid rgba(38, 52, 77, 0.1);
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.output-box.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-soft);
+}
+
+@media (max-width: 880px) {
+    .page-shell {
+        width: min(100% - 20px, 1120px);
+        padding: 20px 0;
+    }
+
+    .hero-card {
+        padding: 22px;
+        border-radius: 24px;
+    }
+
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-header {
+        flex-direction: column;
+    }
+
+    .meta {
+        justify-content: flex-start;
+    }
+
+    .output-box,
+    textarea {
+        min-height: 240px;
+    }
+}
