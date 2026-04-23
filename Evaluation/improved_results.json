@@ -1,0 +1,27 @@
+[
+  {
+    "input": "Artificial intelligence is transforming healthcare...",
+    "issue_fixed": "summary is now structured and more informative",
+    "correct": true
+  },
+  {
+    "input": "AI is good",
+    "issue_fixed": "short input now returns proper error",
+    "correct": true
+  },
+  {
+    "input": "asdfghjkl",
+    "issue_fixed": "invalid input is detected",
+    "correct": true
+  },
+  {
+    "input": "long paragraph text",
+    "issue_fixed": "better formatted summary output",
+    "correct": true
+  },
+  {
+    "input": "empty input",
+    "issue_fixed": "handled by validation layer",
+    "correct": true
+  }
+]

@@ -1,4 +1,5 @@
 import logging
+import re
 from typing import Annotated
 
 from fastapi import FastAPI
@@ -10,13 +11,13 @@ from pydantic import BaseModel, ConfigDict, Field
 app = FastAPI()
 logger = logging.getLogger(__name__)
 
+# ✅ CORS Middleware (fixed syntax)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)
 )
 
 # ✅ Input schema
@@ -25,7 +26,7 @@ class TextInput(BaseModel):
 
     text: Annotated[str, Field(..., min_length=1, max_length=5000, strict=True)]
 
-
+# ✅ Validation error handler
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(_, exc: RequestValidationError):
     details = [
@@ -39,7 +40,7 @@ async def validation_exception_handler(_, exc: RequestValidationError):
         content={"error": "Invalid request payload", "details": details},
     )
 
-
+# ✅ Generic error handler
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(_, exc: Exception):
     logger.exception("Unhandled application error", exc_info=exc)
@@ -51,23 +52,42 @@ async def unhandled_exception_handler(_, exc: Exception):
         },
     )
 
-# ✅ Root endpoint
 @app.get("/")
 def home():
-    return {"message": "AI Summarizer API is running"}
+    return {"message": "NEW VERSION RUNNING"}
 
-# ✅ Summarization endpoint
+# ✅ Improved Summarization endpoint
 @app.post("/summarize")
 def summarize(input: TextInput):
-    words = input.text.split()
+    text = input.text.strip()
+    words = text.split()
 
-    # ✅ Validation (added using Codex suggestion)
+    # ✅ 1. Detect meaningless input
+    if not re.search(r"[a-zA-Z]", text):
+        return {"error": "Invalid input. Please enter meaningful text."}
 
+    # ✅ 2. Handle very short input
+    if len(words) < 5:
+        return {
+            "error": "Input too short. Please provide more detailed text."
+        }
 
-    # ✅ Simple summarization logic
+    # ✅ 3. Basic summarization logic
     if len(words) < 20:
-        summary = input.text
+        summary = text
     else:
         summary = " ".join(words[:20])
 
-    return {"summary": summary}
+    # ✅ 4. Structured output (MAIN IMPROVEMENT)
+    improved_summary = f"""
+Key Summary:
+{summary}
+
+Key Insight:
+- The text highlights important information. Review key points carefully.
+
+Suggestion:
+- Use this summary as a quick overview. Refer to full text for accuracy.
+"""
+
+    return {"summary": improved_summary}
