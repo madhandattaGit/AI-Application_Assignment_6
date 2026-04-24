@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 app = FastAPI()
 logger = logging.getLogger(__name__)
 
-# ✅ CORS Middleware (fixed syntax)
+# ✅ CORS Middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -52,6 +52,7 @@ async def unhandled_exception_handler(_, exc: Exception):
         },
     )
 
+# ✅ Root endpoint
 @app.get("/")
 def home():
     return {"message": "NEW VERSION RUNNING"}
@@ -62,8 +63,8 @@ def summarize(input: TextInput):
     text = input.text.strip()
     words = text.split()
 
-    # ✅ 1. Detect meaningless input
-    if not re.search(r"[a-zA-Z]", text):
+    # ✅ 1. Detect meaningless input FIRST (FIXED)
+    if not re.search(r"[a-zA-Z]{3,}", text):
         return {"error": "Invalid input. Please enter meaningful text."}
 
     # ✅ 2. Handle very short input
@@ -78,7 +79,7 @@ def summarize(input: TextInput):
     else:
         summary = " ".join(words[:20])
 
-    # ✅ 4. Structured output (MAIN IMPROVEMENT)
+    # ✅ 4. Structured output
     improved_summary = f"""
 Key Summary:
 {summary}
